@@ -1,6 +1,7 @@
 const app = new Vue({
     el: '#root',
     data: {
+        interVar: null,
         indice: 0,
         arrayObj :[
             {
@@ -29,25 +30,37 @@ const app = new Vue({
                 item: 'img/05.jpg',
                 text:'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
             }
-        ]
+        ],
+        
     },
     methods: {
-        slide(){
-            if (this.indice =! this.arrayObj.length - 1){
+        setIndice(index){
+            this.indice = index;
+        },
+
+        slideRev(){
+            if (this.indice != this.arrayObj.length - 1){
                 this.indice++;
             } else{
                 this.indice = 0;
             }
-            console.log(counter);
+            
         },
-        slideRev() {
-            if (this.indice =! 0){
+        slide() {
+            if (this.indice != 0){
                 this.indice--;
             } else {
-                this.indice = this.arrayObj.length - 1
+                this.indice = this.arrayObj.length - 1;
             }
-            console.log(indice);
+        },
+        stopSlider(){
+            clearInterval(this.interVar)
+        },
+        startSlider(){
+            this.interVar = setInterval(this.slideRev, 3000)
         }
-        
+    },
+    mounted(){
+        this.startSlider()
     }
 })
